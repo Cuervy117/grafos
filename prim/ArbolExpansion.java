@@ -24,7 +24,6 @@ public class ArbolExpansion {
         // Esas aristas se desencolan y se almacenan en el arbol de Expansion
         Edge desencolada = colaPrioridad.poll();
         arbolExpansion.add(desencolada); // Se añade al M.S.T. la arista del nodo inicial que tenga menor peso para continuar con toda la ejecución del algoritmo
-        
         // Se analiza si el nodo ha sido marcado como visitado y de ser así, la arista desencolada se ignora
         Node siguiente = desencolada.getNode();
         while(!colaPrioridad.isEmpty()){
@@ -42,14 +41,18 @@ public class ArbolExpansion {
                 siguiente.getEdges().forEach(arista -> System.out.println("Nodos del siguiente "+arista.getNode().getId() + " - " + arista.getWeight())); //Sus aristas se encolan
 
                 siguiente.getEdges().forEach(arista ->{
-                    if(!visitados.contains(arista.getNode())){
+                    if(!visitados.contains(arista.getNode())){ //Si no está marcado como visitado, entonces se agrega
                         colaPrioridad.add(arista);
                     }
-                   
                 }); //Sus aristas se encolan
                 visitados.add(siguiente); // Se marca como visitado
+
                 desencolada = colaPrioridad.poll();
-                arbolExpansion.add(desencolada);
+                if(!visitados.contains(desencolada.getNode())){
+                    arbolExpansion.add(desencolada);
+                }
+                
+                System.out.println("Se agregó pije");
                 
             }else{
                 colaPrioridad.poll();
