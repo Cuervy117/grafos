@@ -28,17 +28,36 @@ public class ArbolExpansion {
         // Se analiza si el nodo ha sido marcado como visitado y de ser así, la arista desencolada se ignora
         Node siguiente = desencolada.getNode();
         while(!colaPrioridad.isEmpty()){
-            siguiente = colaPrioridad.poll().getNode();
+
+            System.out.println("Cola hasta el momento");
+            colaPrioridad.forEach(arista -> System.out.println(arista.getNode().getId() + " - " + arista.getWeight()));
+
+            System.out.println("Arbol de expansion");
+            arbolExpansion.forEach(arista -> System.out.println(arista.getNode().getId() + " - " + arista.getWeight()));
+
+            siguiente = desencolada.getNode();
+
+            System.out.println("Siguiente: " + siguiente.getId());
             if(!visitados.contains(siguiente)){ // Si el nodo siguiente no está marcado como visitado
-                siguiente.getEdges().forEach(arista -> colaPrioridad.add(arista)); //Sus aristas se encolan
+                siguiente.getEdges().forEach(arista -> System.out.println("Nodos del siguiente "+arista.getNode().getId() + " - " + arista.getWeight())); //Sus aristas se encolan
+
+                siguiente.getEdges().forEach(arista ->{
+                    if(!visitados.contains(arista.getNode())){
+                        colaPrioridad.add(arista);
+                    }
+                   
+                }); //Sus aristas se encolan
                 visitados.add(siguiente); // Se marca como visitado
-  
+                desencolada = colaPrioridad.poll();
+                arbolExpansion.add(desencolada);
+                
             }else{
                 colaPrioridad.poll();
             }
             
         }
-        
+        System.out.println("Arbol de expansion Retornado");
+        arbolExpansion.forEach(arista -> System.out.println(arista.getNode().getId() + " - " + arista.getWeight()));
         return arbolExpansion;
                 
    }
