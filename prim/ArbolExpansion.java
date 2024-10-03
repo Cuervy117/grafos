@@ -47,11 +47,17 @@ public class ArbolExpansion {
             }
             
         }
-        System.out.println("Arbol de expansion Retornado");
-        arbolExpansion.forEach(arista -> System.out.println(arista.getNode().getId() + " - " + arista.getWeight()));
-        
-        return arbolExpansion;
-                
-   }
+
+        System.out.println(nodoInicial.getId() + " - " + arbolExpansion.get(0).getNode().getId() +" "+  arbolExpansion.get(0).getWeight());
+        arbolExpansion.forEach(arista -> {
+            Node destino = arista.getNode();
+            destino.getEdges().forEach(origen -> {
+                if (arbolExpansion.contains(origen)) {
+                    System.out.println(destino.getId() + " - " + origen.getNode().getId() + " " + origen.getWeight());
+                }
+            });
+        });
+        return arbolExpansion;   
+    }
     
 }
