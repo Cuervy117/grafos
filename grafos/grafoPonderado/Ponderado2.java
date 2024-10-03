@@ -2,6 +2,8 @@ package grafos.grafoPonderado;
 import java.util.ArrayList;
 import java.util.List;
 
+import prim.ArbolExpansion;
+
 public class Ponderado2 {
     public static void main(String[] args) {
         
@@ -10,12 +12,38 @@ public class Ponderado2 {
         addVertex(graph, "A"); // vértice A
         addVertex(graph, "B"); // vértice B
         addVertex(graph, "C"); // vértice C
+        addVertex(graph, "D");
+        addVertex(graph, "F");
+        addVertex(graph, "E");
+        addVertex(graph, "G");
+        addVertex(graph, "H");
 
         addEdge(graph, "A", "B", 4);
-        addEdge(graph, "B", "C", 6);
+        addEdge(graph, "A", "F", 2);
+
+        addEdge(graph, "B", "D", 3);
+        addEdge(graph, "B", "E", 3);
+
+        addEdge(graph, "F", "C", 3);
+
+        addEdge(graph, "D", "H", 3);
+        addEdge(graph, "H", "G", 3);
+
+        addEdge(graph, "C", "D", 2);
+
+        addEdge(graph, "C", "G", 4);
 
         System.out.println("Vértices: " + getVertices(graph));
         System.out.println("Aristas con peso: " + getEdges(graph));
+
+        List<Edge> arbolExpansion = ArbolExpansion.algoritmoPrim(getNodeById(graph, "A"));
+        int mst = 0;
+       
+        for (Edge arbolExpansion2 : arbolExpansion) {
+            mst += arbolExpansion2.getWeight();
+        }
+        System.out.println("MST " + mst);
+
     }
 
     private static void addVertex(List<Node> graph, String id) {
