@@ -49,6 +49,7 @@ public class ArbolExpansion {
         }
         System.out.println("Arbol de expansion Retornado");
         arbolExpansion.forEach(arista -> System.out.println(arista.getNode().getId() + " - " + arista.getWeight()));
+        
         return arbolExpansion;
                 
    }

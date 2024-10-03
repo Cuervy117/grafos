@@ -1,7 +1,6 @@
 package grafos.grafoPonderado;
 import java.util.ArrayList;
 import java.util.List;
-
 import prim.ArbolExpansion;
 
 public class Ponderado2 {
