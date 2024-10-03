@@ -27,19 +27,9 @@ public class ArbolExpansion {
         // Se analiza si el nodo ha sido marcado como visitado y de ser así, la arista desencolada se ignora
         Node siguiente = desencolada.getNode();
         while(!colaPrioridad.isEmpty()){
-
-            System.out.println("Cola hasta el momento");
-            colaPrioridad.forEach(arista -> System.out.println(arista.getNode().getId() + " - " + arista.getWeight()));
-
-            System.out.println("Arbol de expansion");
-            arbolExpansion.forEach(arista -> System.out.println(arista.getNode().getId() + " - " + arista.getWeight()));
-
             siguiente = desencolada.getNode();
 
-            System.out.println("Siguiente: " + siguiente.getId());
             if(!visitados.contains(siguiente)){ // Si el nodo siguiente no está marcado como visitado
-                siguiente.getEdges().forEach(arista -> System.out.println("Nodos del siguiente "+arista.getNode().getId() + " - " + arista.getWeight())); //Sus aristas se encolan
-
                 siguiente.getEdges().forEach(arista ->{
                     if(!visitados.contains(arista.getNode())){ //Si no está marcado como visitado, entonces se agrega
                         colaPrioridad.add(arista);
@@ -51,9 +41,7 @@ public class ArbolExpansion {
                 if(!visitados.contains(desencolada.getNode())){
                     arbolExpansion.add(desencolada);
                 }
-                
-                System.out.println("Se agregó pije");
-                
+                                
             }else{
                 colaPrioridad.poll();
             }
