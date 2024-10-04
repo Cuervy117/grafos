@@ -4,10 +4,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class BFS {
+public class BusquedasGrafos{
+    
+    public static void dfs(List<List<Integer>> graph, int node, ArrayList<Integer> visitados){
+        visitados.add(node); // Marcamos como visitado
+        for(Integer adyacentes : graph.get(node)){
+            if(!visitados.contains(adyacentes)){ // identificamos si ya existe en la lista de visitados
+                BusquedasGrafos.dfs(graph, adyacentes, visitados); // En caso que no, se aplica recursividad sobre ese nodo
+            }
+        }
+    }
     public static List<Integer> busquedaExpansion(List<List<Integer>> grafo, int verticeInicial){
         // Se inicializan las listas que utilizaremos
         Queue<List<Integer>> queue = new LinkedList<>();
+        
         List<Integer> visitados = new ArrayList<>(); //Para guardar nodos adyacentes
 
         List <Integer> nodo = grafo.get(verticeInicial);
@@ -25,4 +35,5 @@ public class BFS {
         }
         return visitados;
     }
+
 }

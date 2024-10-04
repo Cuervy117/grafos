@@ -1,10 +1,11 @@
 package menus;
 
-import java.util.Scanner;
-import grafos.GrafoDir;
+import busquedas.BFS;
 import grafos.Grafo;
+import grafos.GrafoDir;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class MenuGrafos {
     public static void menuGrafoDir(Scanner sc, int numero_De_Nodos){
@@ -46,7 +47,9 @@ public class MenuGrafos {
             System.out.println("1   --- Agregar un nodo");
             System.out.println("2   --- Conectar nodos");
             System.out.println("3   --- Mostrar grafo");
-            System.out.println("4   --- Salir");
+            System.out.println("5   --- Busqueda por Expansión");
+            System.out.println("6   --- Busqueda por Profundidad");
+            System.out.println("7   --- Salir");
             opcion = Integer.parseInt(sc.nextLine());
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -65,9 +68,13 @@ public class MenuGrafos {
                     System.out.println("Aristas : " + Grafo.getEdges(grafo));
                 }
                 case 4 -> {
+                    System.out.println("Has elegido buscar por BFS...");
+                    System.out.println("Lista de visitados por BFS: " + BFS.busquedaExpansion(grafo, opcion));
+                }
+                case 7 -> {
                     if(!Menu.mostrar_Advertencia(sc)) opcion = 5;
                 }
             }
-        }while(opcion != 4);
+        }while(opcion != 7);
     }
 }
