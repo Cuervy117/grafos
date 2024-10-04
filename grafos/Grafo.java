@@ -5,9 +5,9 @@ package grafos;
  * and open the template in the editor.
  */
 
+import busquedas.*;
 import java.util.ArrayList;
 import java.util.List;
-import busquedas.*;
 
 public class Grafo {
     public static void main(String[] args) {
@@ -45,7 +45,7 @@ public class Grafo {
         addEdge(graph, 7, 6);
         System.out.println("Vértices: " + getVertices(graph));
         System.out.println("Aristas: " + getEdges(graph));
-        BusquedaEnProfundidad.dfs(graph, 2, visitados);
+        BusquedasGrafos.dfs(graph, 2, visitados);
         // Imprimir los vértices y las aristas
         System.out.println("Visitados: " + visitados.toString());
     }
