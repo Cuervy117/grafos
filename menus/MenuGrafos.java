@@ -1,6 +1,6 @@
 package menus;
 
-import busquedas.BFS;
+import busquedas.*;
 import grafos.Grafo;
 import grafos.GrafoDir;
 import java.util.ArrayList;
@@ -47,9 +47,9 @@ public class MenuGrafos {
             System.out.println("1   --- Agregar un nodo");
             System.out.println("2   --- Conectar nodos");
             System.out.println("3   --- Mostrar grafo");
-            System.out.println("5   --- Busqueda por Expansión");
-            System.out.println("6   --- Busqueda por Profundidad");
-            System.out.println("7   --- Salir");
+            System.out.println("4   --- Busqueda por Expansión");
+            System.out.println("5   --- Busqueda por Profundidad");
+            System.out.println("6   --- Salir");
             opcion = Integer.parseInt(sc.nextLine());
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -60,6 +60,7 @@ public class MenuGrafos {
                 }
                 case 2 -> {
                     System.out.println("Ingresa los nodos que deseas conectar");
+                    System.out.println("Considera que los nodos inician desde 0");
                     Grafo.addEdge(grafo, Integer.parseInt(sc.nextLine()), Integer.parseInt(sc.nextLine()));
                 }
                 case 3 -> {
@@ -68,12 +69,17 @@ public class MenuGrafos {
                 }
                 case 4 -> {
                     System.out.println("Has elegido buscar por BFS...");
-                    System.out.println("Lista de visitados por BFS: " + BFS.busquedaExpansion(grafo, opcion));
+                    System.out.println("Lista de visitados por BFS: " + BusquedasGrafos.busquedaExpansion(grafo, opcion));
                 }
-                case 7 -> {
+                case 5->{
+                    System.out.println("Has elegido buscar por DFS...");
+                    System.out.println("Lista de visitados por DFS: " + BusquedasGrafos.busquedaExpansion(grafo, opcion));
+                    
+                }
+                case 6 -> {
                     if(!Menu.mostrar_Advertencia(sc)) opcion = 5;
                 }
             }
-        }while(opcion != 7);
+        }while(opcion != 6);
     }
 }

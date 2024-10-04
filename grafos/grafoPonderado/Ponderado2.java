@@ -32,6 +32,34 @@ public class Ponderado2 {
 
         addEdge(graph, "C", "G", 4);
 
+        List<Node> clase = new ArrayList<>();
+
+        for (char ch = 'A'; ch <= 'J'; ch++) {
+            addVertex(clase, String.valueOf(ch));
+        }
+
+        addEdge(clase, "A","C" , 5);
+        addEdge(clase, "A", "J", 6);
+
+        addEdge(clase, "J", "B", 3);
+        addEdge(clase, "J", "D", 4);
+        addEdge(clase, "J", "I", 3);
+
+        addEdge(clase, "C", "D", 5);
+
+        addEdge(clase, "D", "E", 3);
+        addEdge(clase, "D", "F", 4);
+
+        addEdge(clase, "G", "E", 2);
+        addEdge(clase, "E", "F", 2);
+
+        addEdge(clase, "B", "I", 6);
+        addEdge(clase, "I", "F", 4);
+
+        addEdge(clase, "F", "G", 4);
+        addEdge(clase, "G", "H", 3);
+
+
         System.out.println("Vértices: " + getVertices(graph));
         System.out.println("Aristas con peso: " + getEdges(graph));
 
@@ -41,8 +69,14 @@ public class Ponderado2 {
         for (Edge arbolExpansion2 : arbolExpansion) {
             mst += arbolExpansion2.getWeight();
         }
-        System.out.println("MST " + mst);
+        System.out.println("MST del primer grafo: " + mst);
 
+        List<Edge> minimumSpandingTree = ArbolExpansion.algoritmoPrim(getNodeById(clase, "F"));
+        int a = 0;
+        for (Edge edge : minimumSpandingTree) {
+            a += edge.getWeight();
+        }
+        System.out.println("MST del segundo grafo: " + a);
     }
 
     private static void addVertex(List<Node> graph, String id) {
