@@ -15,7 +15,7 @@ public class GrafoDir {
     }
 
     public void addEdge(int src, int dest) {
-        this.adjList.get(src).add(dest);
+        this.adjList.get(src - 1).add(dest - 1);
     }
 
     public void addVertex(){
@@ -25,9 +25,9 @@ public class GrafoDir {
 
     public void printGraph() {
         for (int i = 0; i < numVertices; i++) {
-            System.out.print(i + ": ");
+            System.out.print((i + 1) + ": ");
             for (int j = 0; j < adjList.get(i).size(); j++) {
-                System.out.print(adjList.get(i).get(j) + " ");
+                System.out.print((adjList.get(i).get(j) + 1) + " ");
             }
             System.out.println();
         }
