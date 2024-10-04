@@ -12,47 +12,38 @@ import java.util.PriorityQueue;
  * @author PCPUMA2
  */
 public class ArbolExpansion {
-    public static List <Edge> algoritmoPrim(Node nodoInicial){
-        PriorityQueue <Edge> colaPrioridad = new PriorityQueue<>((e1, e2)-> Integer.compare(e1.getWeight(), e2.getWeight())); //Utiliza el comparator para ordenar según costos de arista ops
-        List <Edge> arbolExpansion = new ArrayList<>(); // El arbol de expansión es una lista de aristas
-        List <Node> visitados = new ArrayList<>(); // El arbol de expansión es una lista de aristas
-        
-        // Con el nodo inicial, se obtienen sus aristas y se encolan en la colaPrioridad
-        nodoInicial.getEdges().forEach(arista -> colaPrioridad.add(arista));
-        visitados.add(nodoInicial); // Se marca como visitado el nodo inicial
-
-        // Esas aristas se desencolan y se almacenan en el arbol de Expansion
-        Edge desencolada = colaPrioridad.poll();
-        arbolExpansion.add(desencolada); // Se añade al M.S.T. la arista del nodo inicial que tenga menor peso para continuar con toda la ejecución del algoritmo
-        // Se analiza si el nodo ha sido marcado como visitado y de ser así, la arista desencolada se ignora
-        Node siguiente = desencolada.getNode();
-        while(!colaPrioridad.isEmpty()){
-            //desencolada = colaPrioridad.poll(); //Aqui esta el error
-
-            siguiente = desencolada.getNode();
-            System.out.println("Cola de prioridad: ");
-            colaPrioridad.forEach(elemento -> System.out.println(elemento.getNode().getId()+ " - " + elemento.getWeight()));
-            System.out.println("Siguiente " + siguiente.getId());
-
-            if(!visitados.contains(siguiente)){ // Si el nodo siguiente no está marcado como visitado
-                siguiente.getEdges().forEach(arista ->{
-                    if(!visitados.contains(arista.getNode())){ //Si no está marcado como visitado, entonces se agrega
-                        colaPrioridad.add(arista);
-                    }
-                }); //Sus aristas se encolan
-                visitados.add(siguiente); // Se marca como visitado
-
-                desencolada = colaPrioridad.poll(); //Aqui esta el error
-                if(!visitados.contains(desencolada.getNode())){
-                    arbolExpansion.add(desencolada);
-                }
-                                
-            }else{
-                desencolada = colaPrioridad.poll();
+    public static List<Edge> primAlgoritmo(Node nodoInicial) {
+        PriorityQueue<Edge> colaPrioridad = new PriorityQueue<>((e1, e2) -> Integer.compare(e1.getWeight(), e2.getWeight())); //Con el comparator ordena las prioridades según el peso
+        // Lista para el árbol de expansión
+        List<Edge> arbolExpansion = new ArrayList<>();
+        // Lista para rastrear nodos visitados
+        List<Node> visitados = new ArrayList<>();
+    
+        visitados.add(nodoInicial); //Se marca como visitado
+        colaPrioridad.addAll(nodoInicial.getEdges()); // Se añaden todas sus aristas del nodo
+    
+        // Mientras haya aristas en la cola de prioridad
+        while (!colaPrioridad.isEmpty()) {
+            Edge desencolada = colaPrioridad.poll(); //Se desencola la arista de menor peso...
+            Node siguiente = desencolada.getNode();  //Se obtiene su nodo siguiente
+    
+            // Si el nodo conectado ya ha sido visitado, ignoramos esta arista
+            if (visitados.contains(siguiente)) {
+                continue; // Saltamos todo el proceso que resta y continuamos con la siguiente iteración
             }
-            
+            //De otro modo...
+            // Agregamos la arista al árbol de expansión
+            arbolExpansion.add(desencolada);
+            visitados.add(siguiente); // Se marca como visitado
+    
+            // Añadimos las aristas del nuevo nodo visitado a la cola de prioridad
+            siguiente.getEdges().forEach(arista -> {
+                // Solo añadimos aristas que conectan a nodos no visitados
+                if (!visitados.contains(arista.getNode())) {
+                    colaPrioridad.add(arista); 
+                }
+            });
         }
-
         System.out.println(nodoInicial.getId() + " - " + arbolExpansion.get(0).getNode().getId() +" "+  arbolExpansion.get(0).getWeight());
         arbolExpansion.forEach(arista -> {
             Node destino = arista.getNode();
@@ -62,7 +53,9 @@ public class ArbolExpansion {
                 }
             });
         });
-        return arbolExpansion;   
+        // Devolvemos el árbol de expansión
+        return arbolExpansion;
     }
+    
     
 }

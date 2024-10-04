@@ -63,7 +63,7 @@ public class Ponderado2 {
         System.out.println("Vértices: " + getVertices(graph));
         System.out.println("Aristas con peso: " + getEdges(graph));
 
-        List<Edge> arbolExpansion = ArbolExpansion.algoritmoPrim(getNodeById(graph, "A"));
+        List<Edge> arbolExpansion = ArbolExpansion.primAlgoritmo(getNodeById(graph, "A"));
         int mst = 0;
        
         for (Edge arbolExpansion2 : arbolExpansion) {
@@ -71,7 +71,7 @@ public class Ponderado2 {
         }
         System.out.println("MST del primer grafo: " + mst);
 
-        List<Edge> minimumSpandingTree = ArbolExpansion.algoritmoPrim(getNodeById(clase, "F"));
+        List<Edge> minimumSpandingTree = ArbolExpansion.primAlgoritmo(getNodeById(clase, "F"));
         int a = 0;
         for (Edge edge : minimumSpandingTree) {
             a += edge.getWeight();
