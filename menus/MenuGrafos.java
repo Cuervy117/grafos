@@ -60,7 +60,6 @@ public class MenuGrafos {
                 }
                 case 2 -> {
                     System.out.println("Ingresa los nodos que deseas conectar");
-                    System.out.println("Considera que los nodos inician desde 0");
                     Grafo.addEdge(grafo, Integer.parseInt(sc.nextLine()), Integer.parseInt(sc.nextLine()));
                 }
                 case 3 -> {
